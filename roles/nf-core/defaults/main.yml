@@ -1,11 +1,11 @@
 nf_core_env_name: nf-core-env
 nf_core_env: "{{ sw_path }}/anaconda/envs/{{ nf_core_env_name }}"
-nf_core_version: 2.10
+nf_core_version: 2.13.1
 nf_core_container_repo: docker://nfcore
 nf_core_vars:
   NFCORE_NO_VERSION_CHECK: 1
-  APPTAINER_CACHEDIR: /scratch/{{ deployment_version }}/singularity_cache
-  APPTAINER_TMPDIR: /scratch/{{ deployment_version }}/singularity_temp
+  SINGULARITY_CACHEDIR: /scratch/{{ deployment_version }}/singularity_cache
+  SINGULARITY_TMPDIR: /scratch/{{ deployment_version }}/singularity_temp
   NXF_SINGULARITY_CACHEDIR: "{{ container_dir }}"
   NXF_SINGULARITY_LIBRARYDIR: "{{ container_dir }}"
   NXF_SINGULARITY_HOME_MOUNT: true
@@ -17,7 +17,7 @@ nf_core_vars:
 biocontainers_dirname: biocontainers
 pipelines:
   - name: rnaseq
-    release: 3.8.1
+    release: "{{ rnaseq_tag }}"
     container_dir: "{{ biocontainers_dirname }}"
   - name: sarek
     release: "{{ sarek_tag }}"
@@ -54,6 +54,9 @@ pipelines:
     container_dir: "{{ biocontainers_dirname }}"
   - name: scrnaseq
     release: 2.3.0
+    container_dir: "{{ biocontainers_dirname }}"
+  - name: demultiplex
+    release: "{{ demultiplex_tag }}"
     container_dir: "{{ biocontainers_dirname }}"
 
 nf_core_delivery_readmes:
